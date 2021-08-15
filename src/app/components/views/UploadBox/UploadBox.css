@@ -1,0 +1,97 @@
+.upload-box {
+    text-align: center;
+    display: inline-block;
+}
+.upload-box p {
+    color: red;
+    text-align: center;
+}
+
+.drop-container {
+    align-items: center;
+    justify-content: center;
+    width: 20rem;
+    height: 10rem;
+    margin: 0;
+    background: linear-gradient(90deg, #4aa1f3 50%, transparent 50%),
+    linear-gradient(90deg, #4aa1f3 50%, transparent 50%),
+    linear-gradient(0deg, #4aa1f3 50%, transparent 50%),
+    linear-gradient(0deg, #4aa1f3 50%, transparent 50%);
+    background-repeat: repeat-x, repeat-x, repeat-y, repeat-y;
+    background-size: 16px 4px, 16px 4px, 4px 16px, 4px 16px;
+    background-position: 0% 0%, 100% 100%, 0% 100%, 100% 0px;
+}
+
+.drop-container-border {
+    height: 10rem;
+    width: 20rem;
+    background: linear-gradient(90deg, #528040 50%, transparent 50%),
+    linear-gradient(90deg, #528040 50%, transparent 50%),
+    linear-gradient(0deg, #528040 50%, transparent 50%),
+    linear-gradient(0deg, #528040 50%, transparent 50%);
+    background-repeat: repeat-x, repeat-x, repeat-y, repeat-y;
+    background-size: 16px 4px, 16px 4px, 4px 16px, 4px 16px;
+    background-position: 0% 0%, 100% 100%, 0% 100%, 100% 0px;
+    border-radius: 5px;
+    padding: 10px;
+    animation: dash 5s linear infinite;
+}
+@keyframes dash {
+    to {
+        background-position: 100% 0%, 0% 100%, 0% 0%, 100% 100%;
+    }
+}
+
+.upload-icon {
+    width: 50px;
+    height: 50px;
+    background: url(../../../../assets/upload.png) no-repeat center center;
+    background-size: 100%;
+    text-align: center;
+    margin: 0 auto;
+    padding-top: 30px;
+}
+
+.drop-message {
+    text-align: center;
+    font-family: Arial;
+    font-size: 20px;
+}
+
+.upload-button {
+    color: #4aa1f3;
+    cursor: pointer;
+}
+
+.file-container-wrapper {
+    width: 100%;
+    margin-top: 1rem;
+}
+
+.file-container {
+    display: grid;
+    margin: 0 auto 0 auto;
+    grid-template-columns: 1fr auto auto 1fr;
+    width: 100%;
+    padding: 0 0.5rem;
+    box-sizing: border-box;
+}
+
+.file-icon-container {
+    grid-column-start: 2;
+    margin-right: 0.4rem;
+}
+
+.file-name-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+    margin-left: 0.4rem;
+}
+
+.file-name {
+    margin: 0;
+    text-align: center;
+}
+

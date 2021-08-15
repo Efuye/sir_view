@@ -1,0 +1,106 @@
+.log-node {
+}
+
+.log-node-content-container {
+    width: 100%;
+    padding: 1rem 0;
+}
+
+.log-node-content {
+    margin: auto;
+    display: grid;
+    grid-template-columns: auto auto auto auto auto auto auto ;
+    grid-gap: 3rem;
+    align-items: center;
+}
+
+.log-info-cell {
+    height: fit-content;
+    padding: 0.2rem 0.4rem;
+    box-sizing: border-box;
+    border-radius: 0.2rem;
+}
+
+.log-tag {
+
+}
+
+.log-id {
+
+}
+
+.log-username {
+    pointer-events: all;
+    cursor: pointer;
+    position: relative;
+}
+
+.log-username:hover {
+    background: #676570;
+    color: white;
+}
+
+.log-username:active {
+    background: transparent;
+    color: black;
+}
+
+.log-user-info {
+    text-align: start;
+    padding-left: 2rem;
+    padding-right: 2rem;
+    position: absolute;
+    color: black;
+    font-weight: normal;
+    font-size: 0.95rem;
+    background: white;
+    top: 1.6rem;
+    border: 1px solid #676570;
+    border-radius: 0.2rem;
+    z-index: 999;
+}
+
+.log-user-info-email {
+    font-style: italic;
+    font-weight: bold;
+}
+
+.log-created-at {
+
+}
+
+.log-method {
+
+}
+
+.log-route {
+
+}
+
+.log-useragent {
+
+}
+
+.log-status-code {
+
+}
+
+.log-response-time {
+
+}
+
+.post {
+    color: #2196F3;
+}
+
+.get {
+    color: darkgreen;
+}
+
+.patch, .put {
+    color: yellowgreen;
+}
+
+.delete {
+    color: darkred;
+}

@@ -1,0 +1,27 @@
+.generator-page {
+    width: 100%;
+}
+
+.generator-content {
+    width: fit-content;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 5rem;
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 10px;
+}
+
+.upload-box-container, .size-selector-container{
+    display: inline-block;
+}
+
+.upload-box-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.size-selector-container {
+    margin-left: 3rem;
+}

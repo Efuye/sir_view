@@ -1,0 +1,31 @@
+.site-motto {
+    font-style: italic;
+    font-size: 2rem;
+}
+
+.landing-page-content-container {
+    width: 100%;
+}
+
+.landing-page-content {
+    width: fit-content;
+    margin: auto;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+}
+
+.landing-page-normal-image-container {
+    align-items: center;
+    display: flex;
+    border-right: 1px black solid;
+    padding-right: 5rem;
+}
+
+.landing-page-normal-image {
+    max-height: 20rem;
+    max-width: 20rem;
+}
+
+.landing-page-image-staircase-container {
+    padding-left: 5rem;
+}

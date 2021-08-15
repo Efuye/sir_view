@@ -1,0 +1,40 @@
+.admin-node {
+
+}
+
+.admin-node-content-container {
+
+}
+
+.admin-node-content {
+    display: grid;
+    grid-template-columns: 1fr auto;
+}
+
+.admin-node-info-container {
+
+}
+
+.admin-node-username-container {
+
+}
+
+.admin-node-username {
+
+}
+
+.admin-node-email-container {
+
+}
+
+.admin-node-email {
+
+}
+
+.admin-node-remove-admin-button-container {
+
+}
+
+.admin-node-remove-admin-button {
+
+}

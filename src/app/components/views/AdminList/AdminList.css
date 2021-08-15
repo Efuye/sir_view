@@ -1,0 +1,36 @@
+.admin-list, .admin-list-content-container, .admin-list-content, .admin-list-spinner-container-wrapper {
+    height: 100%;
+}
+
+.admin-list-content {
+    margin-left: 3rem;
+    border-left: 1px solid black;
+    padding: 1.75rem 0;
+    max-height: 100%;
+    overflow: auto;
+}
+
+.admin-list-spinner-container-wrapper, .admin-list-list-content-disclaimer-container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.admin-list-spinner-container {
+    height: 4rem;
+    width: 4rem;
+}
+
+.admin-list-list-container {
+    margin: 2rem;
+}
+
+.admin-list-list {
+    display: grid;
+}
+
+.admin-list-list-content-disclaimer-container {
+    height: 100%;
+}
+
+.admin-list-list-content-disclaimer {}

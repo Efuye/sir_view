@@ -1,0 +1,22 @@
+.images-staircase-content-container{
+    box-sizing: border-box;
+    padding: 2rem;
+    width: 100%;
+}
+
+.large-image-container, .medium-image-container, .small-image-container {
+    padding: 1rem 0;
+}
+
+.large-image {
+    max-height: 15rem;
+    max-width: 15rem;
+}
+.medium-image {
+    max-height: 10rem;
+    max-width: 10rem;
+}
+.small-image {
+    max-height: 5rem;
+    max-width: 5rem;
+}

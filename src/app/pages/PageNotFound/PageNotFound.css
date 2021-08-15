@@ -1,0 +1,21 @@
+.page-not-found-content-container {
+    display: flex;
+    height: 20rem;
+    width: 30rem;
+    margin: 5rem auto auto auto;
+    align-items: center;
+    justify-content: center;
+}
+
+.page-not-found-content {
+    text-align: center;
+}
+
+.page-not-found-image-container {
+}
+
+.page-not-found-disclaimer-container {
+    font-size: 1.5rem;
+    font-style: italic;
+    font-weight: bold;
+}
