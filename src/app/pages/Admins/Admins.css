@@ -8,3 +8,7 @@
     display: grid;
     grid-template-columns: 1fr 1fr;
 }
+
+.admin-page-admin-list-container {
+    width: 30rem;
+}

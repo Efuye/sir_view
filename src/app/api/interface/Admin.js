@@ -8,7 +8,7 @@ export async function getAdmins(filters) {
     );
 
     if (res && res.data?.data && res.status === 200) {
-      return { data: res.data.data };
+      return res.data;
     } else return false;
   } catch (err) {
     console.error(err);
@@ -28,9 +28,7 @@ export async function verifyAdmin(id) {
       }
     );
 
-    if (res && res.status === 204) {
-      return { data: res.data.data };
-    } else return false;
+    return res && res.status === 204;
   } catch (err) {
     console.error(err);
     return false;
@@ -49,9 +47,7 @@ export async function removeAdmin(id) {
       }
     );
 
-    if (res && res.status === 204) {
-      return { data: res.data.data };
-    } else return false;
+    return res && res.status === 204;
   } catch (err) {
     console.error(err);
     return false;

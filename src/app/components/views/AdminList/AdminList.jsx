@@ -2,24 +2,34 @@ import "./AdminList.css";
 import { useEffect, useState } from "react";
 import UserNode from "../UserList/UserNode/UserNode";
 import { getAdmins, removeAdmin } from "../../../api/interface/Admin";
+import AdminNode from "./AdminNode/AdminNode";
 
-const AdminList = function AdminList() {
-  const [admins, setAdmins] = useState([]);
+const AdminList = function AdminList({ adminsState, usersState }) {
+  const [admins, setAdmins] = adminsState;
+  const [users, setUsers] = usersState;
   const [querying, setQuerying] = useState(false);
-
-  async function handleGetAdmins() {
-    const result = await getAdmins();
-    if (result) setAdmins(result);
-  }
 
   useEffect(() => {
     setQuerying(true);
     void handleGetAdmins();
   }, []);
 
+  async function handleGetAdmins() {
+    setQuerying(true);
+    const result = await getAdmins();
+    if (result) setAdmins(result.data);
+    setQuerying(false);
+  }
+
   async function handleRemoveAdmin(id) {
     const result = await removeAdmin(id);
-    if (result) setAdmins(admins.filter((admin) => admin.id !== id));
+    if (result) {
+      const admin = admins.filter((admin) => admin.id === id)[0];
+      setAdmins(admins.filter((admin) => admin.id !== id));
+
+      admin.role = "ADMIN";
+      setUsers([...users, admin]);
+    }
   }
 
   return (
@@ -31,11 +41,11 @@ const AdminList = function AdminList() {
               <div className="admin-list-list">
                 {admins.map((admin) => (
                   <div className="admin-node-container">
-                    <UserNode
+                    <AdminNode
                       id={admin.id}
                       email={admin.email}
                       username={admin.username}
-                      handleMakeAdmin={handleRemoveAdmin}
+                      handleRemoveAdmin={handleRemoveAdmin}
                     />
                   </div>
                 ))}

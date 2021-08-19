@@ -46,8 +46,7 @@
 }
 
 .user-list-list-container {
-    margin: 2rem;
-    overflow: scroll;
+    margin: 1rem 0;
 }
 
 .user-list-list {

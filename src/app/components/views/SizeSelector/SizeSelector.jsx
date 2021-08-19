@@ -29,7 +29,7 @@ const SizeSelector = function SizeSelector() {
 
   function download(element, data, name) {
     const blob = new Blob([data], {
-      type: "application/zip",
+      type: "octet-stream",
     });
     element.href = URL.createObjectURL(blob);
     element.download = name;

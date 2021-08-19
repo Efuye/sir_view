@@ -20,7 +20,7 @@ const LogNode = function LogNode({
     <div className="log-node">
       <div className="log-node-content-container">
         <div className="log-node-content">
-          <div className={`log-info-cell log-tag ${tag.toLowerCase()}`}>
+          <div className={`log-info-cell log-tag ${tag?.toLowerCase()}`}>
             <span>{tag}</span>
           </div>
           {/*<div className="log-info-cell log-ip">*/}
@@ -30,20 +30,13 @@ const LogNode = function LogNode({
             className={`log-info-cell log-username`}
             tabIndex={0}
             onClick={(e) => setShowUserInfo(true)}
-            onBlur={(e) => {
+            onMouseLeave={(e) => {
               setShowUserInfo(false);
             }}
-            onfocusin={(e) => setShowUserInfo(true)}
+            onMouseEnter={(e) => setShowUserInfo(true)}
           >
             {showUserInfo ? (
-              <div
-                className="log-user-info"
-                onClick={(e) => {
-                  e.preventDefault();
-                  setShowUserInfo(true);
-                  console.log("hi");
-                }}
-              >
+              <div className="log-user-info">
                 <p className="log-user-info-email">{email}</p>
                 <p className="log-user-info-stat">{`${howManyPerMonth} monthly uploads`}</p>
               </div>
@@ -53,7 +46,7 @@ const LogNode = function LogNode({
           <div className={`log-info-cell log-created-at`}>
             <span>{createdAt}</span>
           </div>
-          <div className={`log-info-cell log-method ${method.toLowerCase()}`}>
+          <div className={`log-info-cell log-method ${method?.toLowerCase()}`}>
             <span>{method}</span>
           </div>
           <div className={`log-info-cell log-route`}>

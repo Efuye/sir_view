@@ -1,5 +1,5 @@
 import React from "react";
-import "./UserNode.css";
+import "./AdminNode.css";
 
 const AdminNode = function AdminNode({
   id,
@@ -13,10 +13,10 @@ const AdminNode = function AdminNode({
         <div className="admin-node-content">
           <div className="admin-node-info-container">
             <div className="admin-node-username-container">
-              <p className="admin-node-username">{email}</p>
+              <p className="admin-node-username">@{username}</p>
             </div>
             <div className="admin-node-email-container">
-              <p className="admin-node-email">{username}</p>
+              <p className="admin-node-email">{email}</p>
             </div>
           </div>
           <div className="admin-node-remove-admin-button-container">

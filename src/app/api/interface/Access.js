@@ -11,6 +11,11 @@ export async function signup(args) {
 
     if (res && res.data?.data && res.status === 201) {
       instance.defaults.headers.common["Authorization"] = res.data.data.token;
+      window.localStorage.setItem(
+        "user",
+        JSON.stringify(res.data.data.profile)
+      );
+      window.localStorage.setItem("idToken", res.data.data.token);
       return res.data.data.profile;
     } else return false;
   } catch (err) {
@@ -29,6 +34,11 @@ export async function signin(args) {
 
     if (res.data.data && res.status === 201) {
       instance.defaults.headers.common["Authorization"] = res.data.data.token;
+      window.localStorage.setItem(
+        "user",
+        JSON.stringify(res.data.data.profile)
+      );
+      window.localStorage.setItem("idToken", res.data.data.token);
       return res.data.data.profile;
     } else return false;
   } catch (err) {
@@ -45,8 +55,7 @@ export async function changePassword(args) {
       newPassword,
     });
 
-    if (res.status === 204) return true;
-    else return false;
+    return res.status === 204;
   } catch (err) {
     console.error(err);
     return false;
@@ -61,6 +70,8 @@ export async function signout() {
 
     if (res.status === 204) {
       instance.defaults.headers.common["Authorization"] = "";
+      window.localStorage.removeItem("user");
+      window.localStorage.removeItem("idToken");
       return true;
     } else return false;
   } catch (err) {

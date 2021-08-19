@@ -2,7 +2,7 @@ import { useHistory, useLocation } from "react-router";
 import "./TopBar.css";
 import { signout } from "../../../api/interface/Access";
 import ProfileContext from "../../../data/contexts/ProfileContext";
-import { useContext, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 
 const navigablePathNames = ["/generator", "/logs", "/admins"];
 
@@ -11,6 +11,10 @@ const TopBar = function TopBar() {
   const location = useLocation();
   const { profile, setProfile } = useContext(ProfileContext);
   const [path, setPath] = useState(location.pathname);
+
+  useEffect(() => {
+    setPath(location.pathname);
+  }, []);
 
   async function handleSignout() {
     const result = await signout();

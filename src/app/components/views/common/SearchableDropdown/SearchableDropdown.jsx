@@ -7,12 +7,13 @@ const SearchableDropdown = function SearchableDropdown({
   placeholder = "Search..",
   value = "",
   searchHandler,
-  expandHandler,
+  children,
+  expandedDropDown,
+  items,
 }) {
-  const [dropdownExpanded, setDropdownExpanded] = useState(false);
+  const [dropdownExpanded, setDropdownExpanded] = expandedDropDown;
   const [searchInput, setSearchInput] = useState(value);
   const [queryingItems, setQueryingItems] = useState(false);
-  const [items, setItems] = useState([]);
 
   function handleFocusShift(e) {
     setDropdownExpanded(false);
@@ -26,38 +27,34 @@ const SearchableDropdown = function SearchableDropdown({
       setDropdownExpanded(true);
       setQueryingItems(true);
 
-      const result = await searchHandler(e);
+      await searchHandler(e);
       setQueryingItems(false);
-
-      if (result) setItems(result);
     }
   }
 
   async function handleDropdownExpand(e) {
     setDropdownExpanded(!dropdownExpanded);
 
-    if (dropdownExpanded && (expandHandler || searchHandler)) {
+    if (dropdownExpanded && searchHandler) {
       setQueryingItems(true);
 
-      const result = (await expandHandler(e)) || (await searchHandler(e));
+      await searchHandler(e);
       setQueryingItems(false);
-
-      if (result) setItems(result);
     }
   }
 
-  function renderUserNode(username, email) {
-    return (
-      <>
-        <div className="log-search-user-node-container">
-          <div className="log-search-user-node">
-            <p className="log-search-user-node-username">@{username}</p>
-            <p className="log-search-user-node-email">{email}</p>
-          </div>
-        </div>
-      </>
-    );
-  }
+  // function renderUserNode(username, email) {
+  //   return (
+  //     <>
+  //       <div className="log-search-user-node-container">
+  //         <div className="log-search-user-node">
+  //           <p className="log-search-user-node-username">@{username}</p>
+  //           <p className="log-search-user-node-email">{email}</p>
+  //         </div>
+  //       </div>
+  //     </>
+  //   );
+  // }
 
   return (
     <div className="searchable-dropdown" onBlur={(e) => handleFocusShift(e)}>
@@ -81,13 +78,17 @@ const SearchableDropdown = function SearchableDropdown({
         </div>
       </div>
       <div
+        style={{ display: dropdownExpanded ? "flex" : "none" }}
         className={`searchable-dropdown-dropdown-container ${
           items.length || dropdownExpanded ? "expanded" : ""
         }`}
       >
-        <div className="searchable-dropdown-dropdown">
-          {items.length ? (
-            this.props.children
+        <div
+          style={{ display: dropdownExpanded ? "grid" : "none" }}
+          className="searchable-dropdown-dropdown"
+        >
+          {children[1] && children[1].length ? (
+            children
           ) : dropdownExpanded && queryingItems ? (
             <div className="searchable-dropdown-spinner-container">
               <div className="spinner" />

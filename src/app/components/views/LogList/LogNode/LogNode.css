@@ -9,13 +9,13 @@
 .log-node-content {
     margin: auto;
     display: grid;
-    grid-template-columns: auto auto auto auto auto auto auto ;
-    grid-gap: 3rem;
+    grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr 1fr ;
     align-items: center;
 }
 
 .log-info-cell {
     height: fit-content;
+    margin: 0 1rem;
     padding: 0.2rem 0.4rem;
     box-sizing: border-box;
     border-radius: 0.2rem;
@@ -35,10 +35,10 @@
     position: relative;
 }
 
-.log-username:hover {
-    background: #676570;
-    color: white;
-}
+/*.log-username:hover {*/
+/*    background: #676570;*/
+/*    color: white;*/
+/*}*/
 
 .log-username:active {
     background: transparent;

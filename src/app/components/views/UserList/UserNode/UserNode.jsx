@@ -8,10 +8,10 @@ const UserNode = function UserNode({ id, email, username, handleMakeAdmin }) {
         <div className="user-node-content">
           <div className="user-node-info-container">
             <div className="user-node-username-container">
-              <p className="user-node-username">{email}</p>
+              <p className="user-node-username">@{username}</p>
             </div>
             <div className="user-node-email-container">
-              <p className="user-node-email">{username}</p>
+              <p className="user-node-email">{email}</p>
             </div>
           </div>
           <div className="user-node-remove-admin-button-container">

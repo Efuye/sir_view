@@ -4,11 +4,11 @@ export async function getUsers(filters) {
   try {
     const res = await instance.get(
       `${instance.defaults.baseURL}/api/consumer`,
-      filters
+      { params: filters }
     );
 
     if (res && res.data?.data && res.status === 200) {
-      return { data: res.data.data };
+      return res.data;
     } else return false;
   } catch (err) {
     console.error(err);

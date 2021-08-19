@@ -1,5 +1,5 @@
 import "./LogList.css";
-import { useEffect, useState } from "react";
+import { useEffect, useLayoutEffect, useMemo, useState } from "react";
 import { getLogs } from "../../../api/interface/Log";
 import { ReactComponent as LogsIcon } from "../../../../assets/logs.svg";
 import SearchableDropdown from "../common/SearchableDropdown/SearchableDropdown.jsx";
@@ -12,27 +12,38 @@ const LogList = function LogList() {
   const [users, setUsers] = useState([]);
   const [selectedUserId, setSelectedUserId] = useState(null);
   const [userSearchInput, setUserSearchInput] = useState("");
+  const [expandedUserSearchDropdown, setExpandedUserSearchDropdown] =
+    useState(false);
   const [logsSearchInput, setLogsSearchInput] = useState("");
-  const [dateInput, setDateInput] = useState(
-    new Date(new Date() - 2.628e9).toISOString().split("T")[0]
-  );
+  const [dateInput, setDateInput] = useState(new Date().toISOString());
+
+  useEffect(() => {
+    void fetchLogs();
+    console.log(selectedUserId);
+  }, [selectedUserId, dateInput, logsSearchInput]);
 
   async function fetchLogs() {
     setQuerying(true);
+
     const result = await getLogs({
       id: selectedUserId,
       createdAt: dateInput,
       searchString: logsSearchInput,
     });
-    if (result) setLogs(result);
+
+    if (result.data && result.data.length) setLogs(result.data);
+    else if (userSearchInput || logsSearchInput) setLogs([]);
+
     setQuerying(false);
-    return result;
   }
 
   async function fetchUsers() {
-    const result = await getUsers({ searchString: userSearchInput });
-    if (result) setUsers(result);
-    return result;
+    const result = await getUsers({ searchString: userSearchInput, all: true });
+
+    if (result.data && result.data.length) setUsers([...result.data]);
+    else setUsers([]);
+
+    return result.data;
   }
 
   async function handleUserSearchChange(e) {
@@ -46,16 +57,11 @@ const LogList = function LogList() {
 
   async function handleLogsSearchChange(e) {
     setLogsSearchInput(e.target.value);
-    return await fetchLogs();
   }
 
   function handleDateChange(e) {
     setDateInput(e.target.value);
   }
-
-  useEffect(() => {
-    void fetchLogs();
-  }, []);
 
   function renderNoLogsView() {
     return (
@@ -85,19 +91,19 @@ const LogList = function LogList() {
         <div className="logs-list-content-container">
           <div className="logs-list-content">
             {logs.map((log) => (
-              <div className="log-node-container">
+              <div key={log.id} className="log-node-container">
                 <LogNode
                   tag={log.tag}
                   ip={log.ip}
-                  username={log.blame.username}
+                  username={log.blame?.username ?? "Unknown"}
                   createdAt={log.createdAt}
                   method={log.method}
                   route={log.route}
                   useragent={log.useragent}
                   statusCode={log.statusCode}
                   responseTime={log.responseTime}
-                  email={log.blame.email}
-                  howManyPerMonth={log.blame.howManyPerMonth}
+                  email={log.blame?.email ?? "Unknown"}
+                  howManyPerMonth={log.blame?.howManyPerMonth ?? 0}
                 />
               </div>
             ))}
@@ -119,19 +125,24 @@ const LogList = function LogList() {
               searchHandler={handleUserSearchChange}
               expandHandler={handleUserSearchDropdown}
               pluralItemName="users"
+              items={users}
+              expandedDropDown={[
+                expandedUserSearchDropdown,
+                setExpandedUserSearchDropdown,
+              ]}
             >
-              {console.log(users)}
               {users.map((user) => (
                 <div
                   key={user.id}
                   className="dropdown-search-user-node"
                   onClick={(e) => {
                     setSelectedUserId(user.id);
-                    void fetchLogs();
+                    setExpandedUserSearchDropdown(!expandedUserSearchDropdown);
                   }}
+                  tabIndex={0}
                 >
                   <p className="dropdown-search-user-info-username">
-                    {user.username}
+                    @{user.username}
                   </p>
                   <p className="dropdown-search-user-info-email">
                     {user.email}
@@ -143,7 +154,7 @@ const LogList = function LogList() {
           <div className="log-search-date-input-container">
             <input
               className="log-search-date-input"
-              value={dateInput}
+              value={dateInput.split("T")[0]}
               onChange={(e) => handleDateChange(e)}
               type="date"
             />
@@ -159,7 +170,7 @@ const LogList = function LogList() {
           </div>
         </div>
       </div>
-      {!logs.length ? renderNoLogsView() : renderLogsView()}
+      {logs.length <= 0 ? renderNoLogsView() : renderLogsView()}
     </div>
   );
 };

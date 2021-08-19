@@ -3,24 +3,29 @@
 }
 
 .admin-node-content-container {
-
+    padding: 1rem 0 1rem 1rem;
 }
 
 .admin-node-content {
     display: grid;
     grid-template-columns: 1fr auto;
+    align-items: center;
+    grid-gap: 1rem;
+    width: 100%;
+    box-sizing: border-box;
 }
 
 .admin-node-info-container {
-
+    text-align: start;
 }
 
 .admin-node-username-container {
-
+    padding-bottom: 0.1rem;
 }
 
 .admin-node-username {
-
+    margin: 0;
+    font-weight: bold;
 }
 
 .admin-node-email-container {
@@ -28,7 +33,8 @@
 }
 
 .admin-node-email {
-
+    margin: 0;
+    font-style: italic;
 }
 
 .admin-node-remove-admin-button-container {
@@ -36,5 +42,17 @@
 }
 
 .admin-node-remove-admin-button {
+    background: #e50505;
+    color: white;
+    font-weight: bold;
+    font-size: 0.9rem;
+    border: 1px solid transparent;
+    padding: 0.5rem 1rem;
+    cursor: pointer;
+}
 
+.admin-node-remove-admin-button:active {
+    background: white;
+    color: black;
+    border: 1px solid lightgrey;
 }

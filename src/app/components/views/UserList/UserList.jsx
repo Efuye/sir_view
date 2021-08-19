@@ -1,21 +1,27 @@
 import "./UserList.css";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { getUsers } from "../../../api/interface/User";
 import UserNode from "./UserNode/UserNode";
 import { verifyAdmin } from "../../../api/interface/Admin";
 
-const UserList = function UserList() {
-  const [users, setUsers] = useState([]);
+const UserList = function UserList({ usersState, adminsState }) {
+  const [users, setUsers] = usersState;
+  const [admins, setAdmins] = adminsState;
   const [queryingUsers, setQueryingUsers] = useState(true);
   const [userSearchInput, setUserSearchInput] = useState("");
   const [dateInput, setDateInput] = useState(
     new Date(new Date() - 2.628e9).toISOString().split("T")[0]
   );
 
+  useEffect(() => {
+    setQueryingUsers(true);
+    void handleUserSearch();
+  }, []);
+
   async function handleUserSearch() {
     setQueryingUsers(true);
     const result = await getUsers({ searchString: userSearchInput });
-    if (result) setUsers(result);
+    if (result) setUsers(result.data);
     setQueryingUsers(false);
   }
 
@@ -31,7 +37,13 @@ const UserList = function UserList() {
 
   async function handleMakeAdmin(id) {
     const result = await verifyAdmin(id);
-    if (result) setUsers(users.filter((user) => user.id !== id));
+    if (result) {
+      const user = users.filter((user) => user.id === id)[0];
+      setUsers(users.filter((user) => user.id !== id));
+
+      user.role = "ADMIN";
+      setAdmins([...admins, user]);
+    }
   }
 
   return (
